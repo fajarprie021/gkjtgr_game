@@ -37,7 +37,7 @@ require_once __DIR__ . '/../config/database.php';
     <script src="assets/js/progress.js"></script>
     <script src="assets/js/api.js"></script>
     <script src="assets/js/map.js"></script>
-    <script src="assets/js/game.js"></script>
+    <script src="assets/js/game-engine.js"></script>
     <script src="assets/js/app.js"></script>
 </body>
 </html>
