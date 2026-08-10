@@ -16,6 +16,7 @@ require_once __DIR__ . '/../config/database.php';
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/theme.css">
     <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/game.css">
 </head>
 <body>
@@ -32,8 +33,10 @@ require_once __DIR__ . '/../config/database.php';
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Game Scripts -->
+    <script src="assets/js/audio-manager.js"></script>
+    <script src="assets/js/confetti.js"></script>
     <script src="assets/js/progress.js"></script>
     <script src="assets/js/api.js"></script>
     <script src="assets/js/map.js"></script>

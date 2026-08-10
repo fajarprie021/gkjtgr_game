@@ -1,0 +1,474 @@
+/* =========================================
+   Bible Adventure — Animations & Polish
+   Iteration 10: Visual Polish
+   ========================================= */
+
+/* Standard entrance animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Celebration */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-20px); }
+  60% { transform: translateY(-10px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
+  20%, 40%, 60%, 80% { transform: translateX(6px); }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Checkpoint & Decorations */
+@keyframes pulse-node {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(240, 181, 74, 0.7); }
+  70% { transform: scale(1.08); box-shadow: 0 0 0 18px rgba(240, 181, 74, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(240, 181, 74, 0); }
+}
+
+@keyframes star-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(400px) rotate(720deg); opacity: 0; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes drift {
+  from { transform: translateX(-50px); }
+  to { transform: translateX(calc(100% + 50px)); }
+}
+
+/* === Animation utility classes === */
+.animate-fade { animation: fadeIn 0.4s var(--ease-out); }
+.animate-fade-up { animation: fadeInUp 0.5s var(--ease-out); }
+.animate-fade-down { animation: fadeInDown 0.5s var(--ease-out); }
+.animate-slide-right { animation: slideInRight 0.4s var(--ease-out); }
+.animate-slide-left { animation: slideInLeft 0.4s var(--ease-out); }
+.animate-scale { animation: scaleIn 0.3s var(--ease-bounce); }
+.animate-bounce { animation: bounce 1s var(--ease-out); }
+.animate-wiggle { animation: wiggle 0.5s ease-in-out; }
+.animate-shake { animation: shake 0.5s ease-in-out; }
+.animate-pop { animation: pop 0.4s var(--ease-bounce); }
+.animate-pulse { animation: pulse-node 2s infinite; }
+.animate-spin-star { animation: star-spin 1s var(--ease-out); }
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, var(--game-surface-alt) 25%, #f0ebe0 50%, var(--game-surface-alt) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* === Feedback Cards === */
+.feedback-card {
+  padding: 20px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.feedback-card.correct {
+  background: #e8f5e9;
+  color: var(--game-success-dark);
+  border: 3px solid var(--game-success);
+}
+
+.feedback-card.wrong {
+  background: #ffebee;
+  color: var(--game-danger-dark);
+  border: 3px solid var(--game-danger);
+}
+
+.feedback-card .icon { font-size: 2rem; }
+
+/* === Question Card === */
+.question-card {
+  background: var(--game-surface);
+  padding: 24px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 20px;
+  border-top: 6px solid var(--game-secondary);
+}
+
+.question-number {
+  display: inline-block;
+  background: var(--game-secondary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.question-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--game-text);
+  margin-bottom: 20px;
+}
+
+/* === Option Buttons === */
+.option-btn {
+  display: block;
+  width: 100%;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  background: var(--game-surface-alt);
+  border: 3px solid var(--game-border);
+  border-radius: var(--radius-md);
+  text-align: left;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all var(--transition-fast) var(--ease-out);
+  font-family: var(--font-body);
+  color: var(--game-text);
+  min-height: var(--touch-comfortable);
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--game-primary);
+  background: var(--class-small-bg);
+  transform: translateX(4px);
+}
+
+.option-btn.selected {
+  background: var(--class-small-bg);
+  border-color: var(--game-primary);
+  font-weight: 600;
+}
+
+.option-btn.correct {
+  background: #e8f5e9;
+  border-color: var(--game-success);
+  color: var(--game-success-dark);
+  font-weight: 600;
+}
+
+.option-btn.wrong {
+  background: #ffebee;
+  border-color: var(--game-danger);
+  color: var(--game-danger-dark);
+  font-weight: 600;
+}
+
+.option-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.option-btn .option-letter {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  background: var(--game-primary);
+  color: white;
+  border-radius: 50%;
+  margin-right: 12px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* === Progress Bar === */
+.progress-bar-container {
+  width: 100%;
+  height: 14px;
+  background: var(--game-border);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--game-primary), var(--game-primary-light));
+  border-radius: var(--radius-pill);
+  transition: width var(--transition-slow) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* === Mission Complete === */
+.complete-screen {
+  text-align: center;
+  padding: 40px 20px;
+  animation: scaleIn 0.5s var(--ease-bounce);
+}
+
+.complete-trophy {
+  font-size: 5rem;
+  margin-bottom: 16px;
+  animation: bounce 1.5s ease-in-out;
+}
+
+.complete-title {
+  font-size: 2.5rem;
+  color: var(--game-primary);
+  margin-bottom: 12px;
+}
+
+.complete-subtitle {
+  font-size: 1.2rem;
+  color: var(--game-text-light);
+  margin-bottom: 24px;
+}
+
+.complete-stars {
+  font-size: 2.5rem;
+  margin-bottom: 24px;
+}
+
+.complete-stars .star {
+  display: inline-block;
+  animation: star-spin 0.6s var(--ease-bounce);
+}
+
+.complete-stars .star:nth-child(1) { animation-delay: 0s; }
+.complete-stars .star:nth-child(2) { animation-delay: 0.15s; }
+.complete-stars .star:nth-child(3) { animation-delay: 0.3s; }
+
+/* === Modal === */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s;
+}
+
+.modal-card {
+  background: var(--game-surface);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-modal);
+  animation: scaleIn 0.3s var(--ease-bounce);
+}
+
+/* === Toast === */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--game-text);
+  color: white;
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
+  z-index: var(--z-toast);
+  font-weight: 500;
+  animation: fadeInDown 0.3s;
+}
+
+/* === Audio Toggle Button === */
+.audio-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--game-surface);
+  border: 2px solid var(--game-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: var(--z-sticky);
+  font-size: 1.3rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.audio-toggle:hover {
+  background: var(--game-surface-alt);
+  transform: scale(1.05);
+}
+
+.audio-toggle.muted { opacity: 0.5; }
+
+/* === Class Identity Banner === */
+.class-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.class-banner.small {
+  background: var(--class-small-bg);
+  color: #2e7d32;
+  border: 2px solid var(--class-small);
+}
+
+.class-banner.medium {
+  background: var(--class-medium-bg);
+  color: #1565c0;
+  border: 2px solid var(--class-medium);
+}
+
+.class-banner.large {
+  background: var(--class-large-bg);
+  color: #6a1b9a;
+  border: 2px solid var(--class-large);
+}
+
+.class-banner .class-icon { font-size: 1.5rem; }
+
+/* === Confetti === */
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: var(--z-toast);
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: confetti-fall 3s linear forwards;
+}
+
+/* === Story Intro === */
+.story-intro {
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.story-intro .story-title {
+  font-size: 2.5rem;
+  color: var(--game-primary);
+  margin-bottom: 16px;
+  text-shadow: 2px 2px 0 white;
+}
+
+.story-intro .story-reference {
+  font-size: 1rem;
+  color: var(--game-muted);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.story-intro .story-summary {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--game-text-light);
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+
+/* === Map Decorations === */
+.map-decoration {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  font-size: 2rem;
+  opacity: 0.8;
+}
+
+.map-decoration.cloud { animation: drift 60s linear infinite; }
+
+/* === Reduced motion support === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
