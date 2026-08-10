@@ -1,0 +1,130 @@
+:root {
+  /* Game Colors - Updated per Iteration 2 requirements */
+  --game-primary: #3f6b55;
+  --game-secondary: #4d82c4;
+  --game-accent: #f0b54a;
+  --game-success: #4f9d69;
+  --game-warning: #e4a83b;
+  --game-danger: #cf645e;
+
+  /* Class Colors */
+  --class-small: #63a96b;
+  --class-medium: #4c82c5;
+  --class-large: #7868b8;
+
+  /* Surface & Background */
+  --game-bg: #f7f4ea;
+  --game-surface: #ffffff;
+  --game-text: #263238;
+  --game-muted: #6c757d;
+
+  /* Radii */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.1);
+  --shadow-button: 0 4px 0 rgba(0, 0, 0, 0.15);
+
+  /* Fonts */
+  --font-heading: "Comic Sans MS", "Chalkboard SE", cursive, sans-serif;
+  --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--game-bg);
+  font-family: var(--font-body);
+  color: var(--game-text);
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.game-card {
+  background: var(--game-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: none;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.game-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.game-btn {
+  font-family: var(--font-heading);
+  border-radius: var(--radius-md);
+  padding: 14px 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-button);
+  transition: all 0.1s;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  width: auto;
+}
+
+.game-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.game-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.game-btn-primary {
+  background-color: var(--game-primary);
+  color: white;
+}
+.game-btn-secondary {
+  background-color: var(--game-secondary);
+  color: white;
+}
+.game-btn-accent {
+  background-color: var(--game-accent);
+  color: white;
+}
+
+.mobile-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Utilities */
+.text-game-primary {
+  color: var(--game-primary);
+}
+.bg-game-primary {
+  background-color: var(--game-primary);
+}
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}

@@ -1,0 +1,25 @@
+# Database credentials
+config/database.php
+
+# Development files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Temporary files
+prompt/
+*.zip
+
+# PHP
+vendor/
+composer.lock
+
+# Node (if used in future)
+node_modules/
+package-lock.json
