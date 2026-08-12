@@ -17,6 +17,31 @@ try {
 
     // Question data (WITHOUT correct answers - validated server-side)
     $questions = [
+        'noah' => [
+            'small' => [
+                [
+                    'id' => 'noah-q1-small',
+                    'type' => 'multiple_choice',
+                    'question' => 'Siapa yang hidup benar di hadapan Allah ketika manusia menjadi jahat?',
+                    'options' => ['Adam', 'Nuh', 'Abraham'],
+                    'order' => 1
+                ],
+                [
+                    'id' => 'noah-q2-small',
+                    'type' => 'multiple_choice',
+                    'question' => 'Apa yang Allah perintahkan kepada Nuh untuk dibuat?',
+                    'options' => ['Istana', 'Tembok Besar', 'Bahtera'],
+                    'order' => 2
+                ],
+                [
+                    'id' => 'noah-q3-small',
+                    'type' => 'multiple_choice',
+                    'question' => 'Apa tanda perjanjian Allah dengan Nuh setelah air bah surut?',
+                    'options' => ['Pelangi', 'Bintang', 'Matahari'],
+                    'order' => 3
+                ]
+            ]
+        ],
         'creation' => [
             'small' => [
                 [

@@ -37,7 +37,27 @@ try {
     // Question database with correct answers (server-side only)
     // In production, this should be in database
     $questionAnswers = [
-        // MULTIPLE CHOICE
+        // NOAH - MULTIPLE CHOICE
+        'noah-q1-small' => [
+            'type' => 'multiple_choice',
+            'correct' => 'Nuh',
+            'feedbackCorrect' => 'Tepat! Nuh adalah orang benar di hadapan Allah.',
+            'feedbackWrong' => 'Belum tepat. Baca Kejadian 6:9.'
+        ],
+        'noah-q2-small' => [
+            'type' => 'multiple_choice',
+            'correct' => 'Bahtera',
+            'feedbackCorrect' => 'Benar! Allah menyuruh Nuh membuat bahtera yang besar.',
+            'feedbackWrong' => 'Coba lagi. Allah menyuruh Nuh membuat sesuatu yang besar untuk berlayar.'
+        ],
+        'noah-q3-small' => [
+            'type' => 'multiple_choice',
+            'correct' => 'Pelangi',
+            'feedbackCorrect' => 'Betul! Pelangi adalah tanda perjanjian Allah dengan Nuh.',
+            'feedbackWrong' => 'Belum tepat. Lihatlah langit setelah hujan — apa yang kamu lihat?'
+        ],
+
+        // CREATION - MULTIPLE CHOICE
         'creation-q1-small' => [
             'type' => 'multiple_choice',
             'correct' => 'Allah',
