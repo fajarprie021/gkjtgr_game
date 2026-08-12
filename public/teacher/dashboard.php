@@ -1,4 +1,8 @@
 <?php
+require_once '../../config/security.php';
+sendSecurityHeaders([
+    'csp' => "default-src 'self' https:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:; connect-src 'self' https:; frame-ancestors 'self';"
+]);
 require_once '../../config/database.php';
 require_once '../../config/auth.php';
 
@@ -75,6 +79,19 @@ $staff = getStaffUser();
                         <p class="card-text">Tambah dan kelola akun pemain</p>
                         <a href="players.php" class="btn btn-outline-info">
                             <i class="bi bi-person-plus me-2"></i>Kelola Pemain
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-graph-up-arrow display-1 text-primary mb-3"></i>
+                        <h5 class="card-title">Analytics</h5>
+                        <p class="card-text">Lihat ringkasan sesi, konten, dan performa mekanik</p>
+                        <a href="analytics.php" class="btn btn-outline-primary">
+                            <i class="bi bi-bar-chart me-2"></i>Buka Analytics
                         </a>
                     </div>
                 </div>

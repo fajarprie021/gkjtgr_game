@@ -86,4 +86,16 @@ const ApiService = {
       throw error;
     }
   },
+
+  async logAnalyticsEvent(payload) {
+    try {
+      await fetch("api/analytics/event.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+    } catch (error) {
+      console.warn("Analytics event failed (best effort):", error);
+    }
+  },
 };

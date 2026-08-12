@@ -142,6 +142,34 @@ CREATE TABLE IF NOT EXISTS team_answers (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ====================
+-- ANALYTICS EVENTS
+-- ====================
+
+CREATE TABLE IF NOT EXISTS analytics_events (
+    id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    event_type VARCHAR(50) NOT NULL,
+    player_id INT UNSIGNED NULL,
+    session_id INT UNSIGNED NULL,
+    team_id INT UNSIGNED NULL,
+    story_id VARCHAR(50) NULL,
+    question_id VARCHAR(100) NULL,
+    class_group ENUM('small', 'medium', 'large') NULL,
+    game_mode ENUM('solo', 'classroom') NULL,
+    question_type VARCHAR(30) NULL,
+    result ENUM('correct', 'wrong', 'started', 'completed', 'error') NULL,
+    metadata_json JSON NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_event_type (event_type),
+    INDEX idx_created_at (created_at),
+    INDEX idx_story (story_id),
+    INDEX idx_question (question_id),
+    INDEX idx_session (session_id),
+    INDEX idx_player (player_id),
+    INDEX idx_class_group (class_group),
+    INDEX idx_game_mode (game_mode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ====================
 -- DEFAULT DATA
 -- ====================
 

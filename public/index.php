@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../config/security.php';
+sendSecurityHeaders([
+    'csp' => "default-src 'self' https:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:; connect-src 'self' https:; frame-ancestors 'self';"
+]);
 require_once __DIR__ . '/../config/database.php';
 ?>
 <!DOCTYPE html>

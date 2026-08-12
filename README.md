@@ -27,6 +27,7 @@ php -S localhost:8000
 ```
 
 4. Open browser: `http://localhost:8000`
+5. Health check: `http://localhost:8000/health.php`
 
 ## Project Structure
 
@@ -303,6 +304,78 @@ ProgressService.getStats(App.state.stories);
 4. **Database**: Not yet using MySQL (prepared for future)
 5. **Game Mechanics**: Only multiple-choice questions implemented
 
+## Documentation
+
+- [`docs/v1-release.md`](docs/v1-release.md) — final scope, versioning, release checklist
+- [`docs/teacher-guide.md`](docs/teacher-guide.md) — panduan guru
+- [`docs/admin-guide.md`](docs/admin-guide.md) — panduan admin
+- [`docs/developer-guide.md`](docs/developer-guide.md) — panduan developer
+- [`docs/operations.md`](docs/operations.md) — runbook operasional
+- [`docs/security.md`](docs/security.md) — catatan keamanan
+- [`docs/troubleshooting.md`](docs/troubleshooting.md) — pemecahan masalah umum
+- [`docs/deployment.md`](docs/deployment.md) — cara deploy ke server
+- [`docs/backup-recovery.md`](docs/backup-recovery.md) — backup & restore
+- [`docs/production-readiness.md`](docs/production-readiness.md) — cek kesiapan production
+- [`docs/v2-backlog.md`](docs/v2-backlog.md) — kandidat fitur untuk v2
+- [`docs/content-release.md`](docs/content-release.md) — daftar story rilis v1
+- [`docs/mechanics-release.md`](docs/mechanics-release.md) — daftar mechanic rilis v1
+- [`docs/pilot-index.md`](docs/pilot-index.md) — peta dokumen pilot
+- [`docs/post-pilot-fix-plan.md`](docs/post-pilot-fix-plan.md) — rencana perbaikan pasca-pilot
+- [`docs/post-pilot-validation.md`](docs/post-pilot-validation.md) — laporan validasi pasca-pilot
+- [`CHANGELOG.md`](CHANGELOG.md) — catatan perubahan rilis
+
+## Pilot Testing & Classroom Validation
+
+### What this phase is for
+
+Iteration 13 is not about adding features.
+It is about proving the prototype can be used in real classroom conditions.
+
+### What we observe
+
+- Teacher usability
+- Child usability
+- Team collaboration
+- Learning evidence
+- Technical stability
+- Bible content accuracy
+- Analytics vs. real behavior
+
+### Pilot documents
+
+- [`docs/pilot-index.md`](docs/pilot-index.md) — peta dan urutan baca semua dokumen pilot
+- [`docs/pilot-checklist.md`](docs/pilot-checklist.md) — before / during / after checklist
+- [`docs/pilot-observation.md`](docs/pilot-observation.md) — per-session observation sheet
+- [`docs/pilot-issues.md`](docs/pilot-issues.md) — triaged issue log
+- [`docs/pilot-summary.md`](docs/pilot-summary.md) — final pilot summary
+- [`docs/pilot-summary-example.md`](docs/pilot-summary-example.md) — contoh format rangkuman
+
+### Pilot rules
+
+1. Observe before changing anything.
+2. Measure real classroom behavior.
+3. Learn from the evidence.
+4. Document issues with severity and frequency.
+5. Only fix blockers or critical problems during the pilot window.
+
+### Success criteria
+
+- Teacher can run the main flow without significant developer help.
+- Most children can join with minimal help.
+- The chosen story mission can be completed in available class time.
+- There are no critical technical failures.
+- Learning check shows basic comprehension.
+- Team mode creates positive interaction.
+
+### Issue prioritization
+
+Use this order:
+
+- **MUST FIX** — blocker, security, wrong Bible content, broken progression
+- **SHOULD FIX** — teacher flow friction, question wording, team UX, map clarity
+- **COULD FIX** — extra animation, visual polish, minor copy
+- **NOT NOW** — chat, advanced avatars, global leaderboard, new engine
+
 ## Next Steps
 
 ### Priority 1: Content
@@ -317,7 +390,18 @@ ProgressService.getStats(App.state.stories);
 - [ ] Implement character value badges
 - [ ] Add simple animation effects
 
-### Priority 3: Enhancement
+### Priority 3: Pilot Support
+
+- [ ] Run internal teacher test
+- [ ] Run small-group pilot
+- [ ] Run real classroom pilot when ready
+- [ ] Record observations in `docs/pilot-observation.md`
+- [ ] Log issues in `docs/pilot-issues.md`
+- [ ] Write session summaries in `docs/pilot-summary.md`
+- [ ] Create post-pilot fix plan in `docs/post-pilot-fix-plan.md`
+- [ ] Validate fixes in `docs/post-pilot-validation.md`
+
+### Priority 4: Enhancement
 
 - [ ] Additional question types (matching, sequencing)
 - [ ] Simple achievement system

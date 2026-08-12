@@ -1,7 +1,23 @@
 <?php
 // Authentication & Session Helper Functions
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (($_SERVER['SERVER_PORT'] ?? null) == 443);
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => $isHttps,
+        'httponly' => true,
+        'samesite' => 'Lax',
+    ]);
+    session_start();
+}
+
+function regenerateSessionIdSafe(): void {
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        session_regenerate_id(true);
+    }
+}
 
 // Staff Authentication
 function requireStaffAuth() {
@@ -34,6 +50,7 @@ function staffLogin($pdo, $email, $password) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if ($user && password_verify($password, $user['password_hash'])) {
+        regenerateSessionIdSafe();
         $_SESSION['staff_id'] = $user['id'];
         $_SESSION['staff_name'] = $user['name'];
         $_SESSION['staff_email'] = $user['email'];
@@ -81,6 +98,7 @@ function playerLogin($pdo, $playerCode, $pin) {
     $player = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if ($player && password_verify($pin, $player['pin_hash'])) {
+        regenerateSessionIdSafe();
         $_SESSION['player_id'] = $player['id'];
         $_SESSION['player_code'] = $player['player_code'];
         $_SESSION['player_nickname'] = $player['nickname'];
@@ -113,4 +131,24 @@ function generateSessionCode() {
 
 function generatePlayerToken() {
     return bin2hex(random_bytes(32));
+}
+
+function isAdmin() {
+    $user = getStaffUser();
+    return $user && ($user['role'] ?? 'teacher') === 'admin';
+}
+
+function isTeacher() {
+    $user = getStaffUser();
+    return $user && ($user['role'] ?? '') === 'teacher';
+}
+
+function requireStaffRole(array $roles) {
+    requireStaffAuth();
+    $user = getStaffUser();
+    if (!$user || !in_array($user['role'] ?? 'teacher', $roles, true)) {
+        http_response_code(403);
+        echo json_encode(['success' => false, 'error' => 'Forbidden']);
+        exit;
+    }
 }

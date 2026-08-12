@@ -37,6 +37,15 @@ const GameEngine = {
       throw new Error("No questions available");
     }
 
+    ApiService.logAnalyticsEvent({
+      event_type: "story_started",
+      story_id: storyId,
+      class_group: classGroup,
+      game_mode: mode,
+      session_id: sessionId,
+      metadata: { question_count: this.state.questions.length },
+    });
+
     this.renderQuestion();
   },
 
@@ -616,11 +625,38 @@ const GameEngine = {
   async submitAnswer(answer) {
     const question = this.state.questions[this.state.currentQuestionIndex];
 
+    ApiService.logAnalyticsEvent({
+      event_type: "answer_submitted",
+      story_id: this.state.storyId,
+      question_id: question.id,
+      question_type: question.type,
+      class_group: this.state.classGroup,
+      game_mode: this.state.mode,
+      session_id: this.state.sessionId,
+    });
+
     try {
       const result = await ApiService.validateAnswer(question.id, answer);
+      ApiService.logAnalyticsEvent({
+        event_type: "question_completed",
+        story_id: this.state.storyId,
+        question_id: question.id,
+        question_type: question.type,
+        class_group: this.state.classGroup,
+        game_mode: this.state.mode,
+        session_id: this.state.sessionId,
+        result: result.correct ? "correct" : "wrong",
+      });
       this.showFeedback(result.correct, result.feedback || result.message);
     } catch (error) {
       console.error("Answer validation error:", error);
+      ApiService.logAnalyticsEvent({
+        event_type: "technical_error",
+        story_id: this.state.storyId,
+        question_id: question.id,
+        result: "error",
+        metadata: { source: "validateAnswer" },
+      });
       this.showFeedback(false, "Terjadi kesalahan. Silakan coba lagi.");
     }
   },
@@ -670,6 +706,15 @@ const GameEngine = {
   async finishMission() {
     // Mark story as completed
     ProgressService.completeStory(this.state.storyId);
+
+    ApiService.logAnalyticsEvent({
+      event_type: "story_completed",
+      story_id: this.state.storyId,
+      class_group: this.state.classGroup,
+      game_mode: this.state.mode,
+      session_id: this.state.sessionId,
+      result: "completed",
+    });
 
     // Get story content
     const content = await ApiService.getStoryContent(

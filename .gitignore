@@ -1,8 +1,15 @@
-# Database credentials
+﻿# Environment / secrets
+.env
 config/database.php
 
-# Development files
+# Backups / logs / storage
+logs/
+backups/
+storage/logs/
 *.log
+*.sql
+
+# Development files
 *.tmp
 .DS_Store
 Thumbs.db
