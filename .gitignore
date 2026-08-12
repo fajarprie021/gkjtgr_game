@@ -7,7 +7,10 @@ logs/
 backups/
 storage/logs/
 *.log
-*.sql
+
+# SQL dumps/backups (tapi bukan migration schema)
+*_dump.sql
+*_backup.sql
 
 # Development files
 *.tmp

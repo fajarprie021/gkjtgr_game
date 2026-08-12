@@ -1,108 +1,80 @@
 <?php
 /**
- * Questions API endpoint
+ * Questions API endpoint - Database-driven
  */
 header('Content-Type: application/json');
 require_once __DIR__ . '/../../config/database.php';
 
-$storyId = $_GET['storyId'] ?? '';
-$classGroup = $_GET['classGroup'] ?? 'small';
+$storyId    = trim($_GET['storyId']    ?? '');
+$classGroup = trim($_GET['classGroup'] ?? 'small');
 
 try {
-    // Validate inputs
-    $validClasses = ['small', 'medium', 'large'];
-    if (!in_array($classGroup, $validClasses)) {
-        $classGroup = 'small'; // Fallback to default
+    if (!$pdo) {
+        throw new RuntimeException('Database tidak tersedia.');
     }
 
-    // Question data (WITHOUT correct answers - validated server-side)
-    $questions = [
-        'noah' => [
-            'small' => [
-                [
-                    'id' => 'noah-q1-small',
-                    'type' => 'multiple_choice',
-                    'question' => 'Siapa yang hidup benar di hadapan Allah ketika manusia menjadi jahat?',
-                    'options' => ['Adam', 'Nuh', 'Abraham'],
-                    'order' => 1
-                ],
-                [
-                    'id' => 'noah-q2-small',
-                    'type' => 'multiple_choice',
-                    'question' => 'Apa yang Allah perintahkan kepada Nuh untuk dibuat?',
-                    'options' => ['Istana', 'Tembok Besar', 'Bahtera'],
-                    'order' => 2
-                ],
-                [
-                    'id' => 'noah-q3-small',
-                    'type' => 'multiple_choice',
-                    'question' => 'Apa tanda perjanjian Allah dengan Nuh setelah air bah surut?',
-                    'options' => ['Pelangi', 'Bintang', 'Matahari'],
-                    'order' => 3
-                ]
-            ]
-        ],
-        'creation' => [
-            'small' => [
-                [
-                    'id' => 'creation-q1-small',
-                    'type' => 'multiple_choice',
-                    'question' => 'Siapa yang menciptakan langit dan bumi?',
-                    'options' => ['Allah', 'Adam', 'Nuh'],
-                    'order' => 1
-                ],
-                [
-                    'id' => 'creation-q2-small',
-                    'type' => 'multiple_choice',
-                    'question' => 'Berapa hari Allah menciptakan alam semesta?',
-                    'options' => ['3 Hari', '6 Hari', '7 Hari'],
-                    'order' => 2
-                ]
-            ],
-            'medium' => [
-                [
-                    'id' => 'creation-q1-medium',
-                    'type' => 'multiple_choice',
-                    'question' => 'Apa yang Allah ciptakan pada hari pertama?',
-                    'options' => ['Terang', 'Hewan', 'Manusia', 'Tumbuhan'],
-                    'order' => 1
-                ]
-            ],
-            'large' => [
-                [
-                    'id' => 'creation-q1-large',
-                    'type' => 'multiple_choice',
-                    'question' => 'Manusia diciptakan menurut gambar dan rupa siapa?',
-                    'options' => ['Malaikat', 'Debu Tanah', 'Allah', 'Dunia'],
-                    'order' => 1
-                ]
-            ]
-        ]
-    ];
+    $validClasses = ['small', 'medium', 'large'];
+    if (!in_array($classGroup, $validClasses)) {
+        $classGroup = 'small';
+    }
 
-    // Get questions for story and class
-    if (!isset($questions[$storyId])) {
+    if (empty($storyId)) {
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'error'   => 'INVALID_INPUT',
+            'message' => 'storyId diperlukan.'
+        ]);
+        exit;
+    }
+
+    // Cek apakah story ada
+    $stmtStory = $pdo->prepare("SELECT id FROM stories WHERE id = ? AND is_active = TRUE LIMIT 1");
+    $stmtStory->execute([$storyId]);
+    if (!$stmtStory->fetch()) {
         http_response_code(404);
         echo json_encode([
             'success' => false,
-            'error' => 'STORY_NOT_FOUND',
+            'error'   => 'STORY_NOT_FOUND',
             'message' => 'Cerita tidak ditemukan.'
         ]);
         exit;
     }
 
-    $result = $questions[$storyId][$classGroup] ?? [];
+    // Ambil pertanyaan dari database (tanpa jawaban benar)
+    $stmt = $pdo->prepare(
+        "SELECT id, type, question, options, items, left_items, right_items,
+                question_order AS `order`
+         FROM questions
+         WHERE story_id = ? AND class_group = ?
+         ORDER BY question_order ASC"
+    );
+    $stmt->execute([$storyId, $classGroup]);
+
+    $questions = [];
+    while ($row = $stmt->fetch()) {
+        $row['order']      = (int) $row['order'];
+        $row['options']    = $row['options']    ? json_decode($row['options'],    true) : null;
+        $row['items']      = $row['items']      ? json_decode($row['items'],      true) : null;
+        $row['left_items'] = $row['left_items'] ? json_decode($row['left_items'], true) : null;
+        $row['right_items']= $row['right_items']? json_decode($row['right_items'],true) : null;
+
+        // Hapus field null agar response bersih
+        $row = array_filter($row, fn($v) => $v !== null);
+        $questions[] = $row;
+    }
 
     echo json_encode([
         'success' => true,
-        'data' => $result,
+        'data'    => array_values($questions),
         'message' => 'OK'
     ]);
+
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'error' => 'SERVER_ERROR',
+        'error'   => 'SERVER_ERROR',
         'message' => 'Gagal memuat pertanyaan.'
     ]);
 }
