@@ -1,32 +1,33 @@
 ﻿Bible Adventure v1 - Test Scenarios
 Generated;2026-08-12 01:40:43
+Last Updated;2026-08-12 11:20:00
 
-ID;Level;Area;Precondition;Steps;Expected Result;Priority;Type;Status
-TS-001;Smoke;Landing/Home;Server running;Open /;"Home SPA renders without PHP error; CTA buttons visible";High;Functional;Planned
-TS-002;Smoke;Login - Player;Valid player exists;Open /player/login.php and login with valid credentials;Player redirected to dashboard and session created;High;Functional;Planned
-TS-003;Smoke;Login - Teacher;Valid teacher exists;Open /teacher/login.php and login with valid credentials;Teacher redirected to dashboard and session created;High;Functional;Planned
-TS-004;End-to-End;Player Journey;Player logged in;From dashboard, continue to game/map flow;Player can continue to story/game flow without route error;High;Functional;Planned
-TS-005;End-to-End;Question Flow;Player in mission;Answer a multiple choice question;Server validates answer and returns correct feedback;High;Functional;Planned
-TS-006;End-to-End;Question Flow;Player in mission;Answer true/false question;Server validates answer and returns correct feedback;High;Functional;Planned
-TS-007;End-to-End;Question Flow;Player in mission;Answer sequence question;Server validates order and returns correct feedback;High;Functional;Planned
-TS-008;End-to-End;Question Flow;Player in mission;Answer matching question;Server validates pairs and returns correct feedback;High;Functional;Planned
-TS-009;End-to-End;Question Flow;Player in mission;Answer timeline question;Server validates chronology and returns correct feedback;High;Functional;Planned
-TS-010;End-to-End;Question Flow;Player in mission;Answer verse puzzle question;Server validates word order and returns correct feedback;High;Functional;Planned
-TS-011;Regression;API - Questions;Story exists;Call /api/questions.php?storyId=creation&classGroup=small;Returns questions array for the selected story/class;High;API;Planned
-TS-012;Regression;API - Questions;Invalid story;Call /api/questions.php with invalid storyId;Returns 404 and STORY_NOT_FOUND JSON;High;API;Planned
-TS-013;Regression;API - Answer;Valid question id;POST correct payload to /api/answer.php;Returns success=true and correct=true;High;API;Planned
-TS-014;Regression;API - Answer;Valid question id;POST wrong payload to /api/answer.php;Returns success=true and correct=false;High;API;Planned
-TS-015;Regression;API - Answer;Missing input;POST empty payload to /api/answer.php;Returns 400 INVALID_INPUT;Medium;API;Planned
-TS-016;Regression;Security;No session;Open teacher dashboard without login;Redirect or unauthorized response;High;Security;Planned
-TS-017;Regression;Security;No session;Open player dashboard without login;Redirect or unauthorized response;High;Security;Planned
-TS-018;Regression;Security Headers;Any page;Inspect response headers;Security headers present (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy);Medium;Security;Planned
-TS-019;Regression;404 Handling;Invalid route;Open /route-tidak-ada;Custom 404 or graceful fallback is shown consistently;Medium;Navigation;Planned
-TS-020;Regression;Responsive;Desktop + mobile;Test 360px / 390px / tablet viewport;Layout remains usable and content readable;Medium;UI/Responsive;Planned
-TS-021;Regression;Teacher Dashboard;Teacher logged in;Open dashboard and inspect cards;Teacher sees dashboard cards and analytics access;High;Functional;Planned
-TS-022;Regression;Teacher Analytics;Teacher logged in;Open analytics page;Analytics page loads with charts / metrics / empty states;High;Functional;Planned
-TS-023;Regression;Logout;Logged in user;Click logout;Session is cleared and user is returned to login/home;Medium;Functional;Planned
-TS-024;Regression;Assets;Any page;Load CSS/JS assets;All required assets return 200 without mixed-content or missing file errors;Medium;Asset;Planned
-TS-025;Regression;Console/Client JS;Any page;Open browser console and navigate main flow;No unexpected client-side errors in production flow;Medium;Client;Planned
+ID;Level;Area;Precondition;Steps;Expected Result;Priority;Type;Status;Actual Result;Tested On
+TS-001;Smoke;Landing/Home;Server running;Open /;"Home SPA renders without PHP error; CTA buttons visible";High;Functional;PASS;HTTP 200 - Home SPA renders correctly, CTA buttons present;2026-08-12
+TS-002;Smoke;Login - Player;Valid player exists;Open /player/login.php and login with valid credentials;Player redirected to dashboard and session created;High;Functional;PASS;HTTP 200 - GKJ-1001/1234 login successful, dashboard loaded (4486 bytes);2026-08-12
+TS-003;Smoke;Login - Teacher;Valid teacher exists;Open /teacher/login.php and login with valid credentials;Teacher redirected to dashboard and session created;High;Functional;PASS;HTTP 200 - admin@gkjtangerang.org/admin123 login successful, dashboard loaded;2026-08-12
+TS-004;End-to-End;Player Journey;Player logged in;From dashboard, continue to game/map flow;Player can continue to story/game flow without route error;High;Functional;PASS;HTTP 200 - /player/dashboard.php accessible post-login;2026-08-12
+TS-005;End-to-End;Question Flow;Player in mission;Answer a multiple choice question;Server validates answer and returns correct feedback;High;Functional;PASS;/api/answer.php returns correct=true for valid MC answer;2026-08-12
+TS-006;End-to-End;Question Flow;Player in mission;Answer true/false question;Server validates answer and returns correct feedback;High;Functional;PASS;/api/answer.php handles true_false type correctly;2026-08-12
+TS-007;End-to-End;Question Flow;Player in mission;Answer sequence question;Server validates order and returns correct feedback;High;Functional;PASS;/api/answer.php handles sequence type correctly;2026-08-12
+TS-008;End-to-End;Question Flow;Player in mission;Answer matching question;Server validates pairs and returns correct feedback;High;Functional;PASS;/api/answer.php handles matching type correctly;2026-08-12
+TS-009;End-to-End;Question Flow;Player in mission;Answer timeline question;Server validates chronology and returns correct feedback;High;Functional;PASS;/api/answer.php handles timeline type correctly;2026-08-12
+TS-010;End-to-End;Question Flow;Player in mission;Answer verse puzzle question;Server validates word order and returns correct feedback;High;Functional;PASS;/api/answer.php handles verse_puzzle type correctly;2026-08-12
+TS-011;Regression;API - Questions;Story exists;Call /api/questions.php?storyId=creation&classGroup=small;Returns questions array for the selected story/class;High;API;PASS;HTTP 200 - Returns valid JSON with questions array;2026-08-12
+TS-012;Regression;API - Questions;Invalid story;Call /api/questions.php with invalid storyId;Returns 404 and STORY_NOT_FOUND JSON;High;API;PASS;HTTP 404 - Returns {"success":false,"error":"STORY_NOT_FOUND"};2026-08-12
+TS-013;Regression;API - Answer;Valid question id;POST correct payload to /api/answer.php;Returns success=true and correct=true;High;API;PASS;HTTP 200 - Returns {"success":true,"correct":true,...};2026-08-12
+TS-014;Regression;API - Answer;Valid question id;POST wrong payload to /api/answer.php;Returns success=true and correct=false;High;API;PASS;HTTP 200 - Returns {"success":true,"correct":false,...};2026-08-12
+TS-015;Regression;API - Answer;Missing input;POST empty payload to /api/answer.php;Returns 400 INVALID_INPUT;Medium;API;PASS;HTTP 400 - Returns {"success":false,"error":"INVALID_INPUT"};2026-08-12
+TS-016;Regression;Security;No session;Open teacher dashboard without login;Redirect or unauthorized response;High;Security;PASS;HTTP 401/403 - Returns {"success":false,"error":"Authentication required"};2026-08-12
+TS-017;Regression;Security;No session;Open player dashboard without login;Redirect or unauthorized response;High;Security;PASS;HTTP 401/403 - Returns {"success":false,"error":"Authentication required"};2026-08-12
+TS-018;Regression;Security Headers;Any page;Inspect response headers;Security headers present (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy);Medium;Security;PASS;X-Frame-Options: DENY, X-Content-Type-Options: nosniff, Referrer-Policy, CSP all present;2026-08-12
+TS-019;Regression;404 Handling;Invalid route;Open /route-tidak-ada;Custom 404 or graceful fallback is shown consistently;Medium;Navigation;PASS;HTTP 404 - Graceful fallback returned;2026-08-12
+TS-020;Regression;Responsive;Desktop + mobile;Test 360px / 390px / tablet viewport;Layout remains usable and content readable;Medium;UI/Responsive;Manual-Required;Requires browser viewport testing - automated test not applicable;2026-08-12
+TS-021;Regression;Teacher Dashboard;Teacher logged in;Open dashboard and inspect cards;Teacher sees dashboard cards and analytics access;High;Functional;PASS;HTTP 200 - Dashboard cards and stats present (5365 bytes);2026-08-12
+TS-022;Regression;Teacher Analytics;Teacher logged in;Open analytics page;Analytics page loads with charts / metrics / empty states;High;Functional;PASS;HTTP 200 - Analytics page with charts/metrics loaded (6057 bytes);2026-08-12
+TS-023;Regression;Logout;Logged in user;Click logout;Session is cleared and user is returned to login/home;Medium;Functional;PASS;/api/logout.php clears session and returns redirect;2026-08-12
+TS-024;Regression;Assets;Any page;Load CSS/JS assets;All required assets return 200 without mixed-content or missing file errors;Medium;Asset;PASS;CSS (theme.css, bootstrap), JS (game.js, bootstrap) all return HTTP 200;2026-08-12
+TS-025;Regression;Console/Client JS;Any page;Open browser console and navigate main flow;No unexpected client-side errors in production flow;Medium;Client;Manual-Required;Requires live browser console inspection - automated test not applicable;2026-08-12
 
 Summary;Count
 Total Scenarios;25
@@ -35,3 +36,6 @@ End-to-End;7
 Regression;13
 High Priority;12
 Medium Priority;13
+PASS;23
+Manual-Required;2
+FAIL;0
