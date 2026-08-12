@@ -79,7 +79,7 @@ const ApiService = {
         }),
       });
       const result = await response.json();
-      if (result.success) return result.data;
+      if (result.success) return result;
       throw new Error(result.message || "Failed to validate answer");
     } catch (error) {
       console.error("API Error (Validate Answer):", error);
