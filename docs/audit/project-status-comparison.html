@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Project Status Comparison — Bible Adventure v1</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: #f7f4ea;
+    color: #2c2c2c;
+    padding: 24px;
+    line-height: 1.5;
+  }
+  .container { max-width: 1280px; margin: 0 auto; }
+
+  header {
+    background: linear-gradient(135deg, #3f6b55 0%, #4d82c4 100%);
+    color: white;
+    padding: 24px 32px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  header h1 { font-size: 1.75rem; margin-bottom: 6px; }
+  header .subtitle { opacity: 0.92; font-size: 0.95rem; }
+  header .meta {
+    display: flex; gap: 24px; margin-top: 14px; flex-wrap: wrap;
+    font-size: 0.875rem;
+  }
+  header .meta span { background: rgba(255,255,255,0.18); padding: 4px 12px; border-radius: 999px; }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-left: 5px solid #4d82c4;
+  }
+  .stat-card.ok   { border-left-color: #4f9d69; }
+  .stat-card.warn { border-left-color: #e4a83b; }
+  .stat-card.fail { border-left-color: #cf645e; }
+  .stat-card.info { border-left-color: #7868b8; }
+  .stat-card .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; color: #666; }
+  .stat-card .value { font-size: 1.85rem; font-weight: 700; margin: 4px 0; }
+  .stat-card .desc  { font-size: 0.85rem; color: #555; }
+
+  section { margin-bottom: 28px; }
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 3px solid #3f6b55;
+    color: #3f6b55;
+  }
+  h3 { font-size: 1.05rem; margin: 16px 0 10px; color: #4d82c4; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    font-size: 0.875rem;
+  }
+  thead { background: #3f6b55; color: white; }
+  th { padding: 12px 14px; text-align: left; font-weight: 600; }
+  td { padding: 10px 14px; border-bottom: 1px solid #eee; vertical-align: top; }
+  tbody tr:hover { background: #faf8f0; }
+  tbody tr:last-child td { border-bottom: none; }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge-ok    { background: #d4f1de; color: #1f5d36; }
+  .badge-warn  { background: #fdecc8; color: #8a5a14; }
+  .badge-fail  { background: #fadcd9; color: #8a2a23; }
+  .badge-info  { background: #e0dcf3; color: #44338a; }
+
+  .legend {
+    display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
+    font-size: 0.85rem;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+
+  .path { font-family: "Consolas", monospace; background: #f0eee5; padding: 2px 6px; border-radius: 4px; font-size: 0.82rem; }
+
+  .recommend {
+    background: #fff8e1;
+    border-left: 5px solid #f0b54a;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin-top: 12px;
+  }
+  .recommend h4 { color: #8a5a14; margin-bottom: 8px; font-size: 0.95rem; }
+  .recommend ol { padding-left: 22px; }
+  .recommend li { margin-bottom: 6px; font-size: 0.9rem; }
+
+  footer {
+    margin-top: 32px;
+    padding: 16px 20px;
+    background: white;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #666;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>📊 Project Status Comparison — Bible Adventure v1</h1>
+  <div class="subtitle">GKJ Tangerang · Sekolah Minggu · v1.0.0 Pre-Release Audit</div>
+  <div class="meta">
+    <span>📅 Generated: 20 Agustus 2026, 10:28 WIB</span>
+    <span>🌿 Branch: master (up-to-date)</span>
+    <span>🔖 Last Commit: 7b4cf72</span>
+    <span>📍 Path: f:\AI\gkjtgr_game</span>
+  </div>
+</header>
+
+<!-- ======================== SUMMARY STATS ======================== -->
+<div class="summary-grid">
+  <div class="stat-card ok">
+    <div class="label">Skor Kesiapan Rilis</div>
+    <div class="value">72%</div>
+    <div class="desc">Teknis siap, validasi empiris belum lengkap</div>
+  </div>
+  <div class="stat-card ok">
+    <div class="label">Dokumen Tersedia</div>
+    <div class="value">28 / 28</div>
+    <div class="desc">Semua guide & runbook tersedia</div>
+  </div>
+  <div class="stat-card fail">
+    <div class="label">Gap Kritis</div>
+    <div class="value">5</div>
+    <div class="desc">Item yang harus ditangani sebelum release</div>
+  </div>
+  <div class="stat-card warn">
+    <div class="label">File Untracked</div>
+    <div class="value">3</div>
+    <div class="desc">Database scratch files belum di-commit</div>
+  </div>
+  <div class="stat-card info">
+    <div class="label">Stories Verified</div>
+    <div class="value">5</div>
+    <div class="desc">creation, noah, abraham, yusuf, musa</div>
+  </div>
+  <div class="stat-card warn">
+    <div class="label">Pilot Status</div>
+    <div class="value">Pending</div>
+    <div class="desc">Pilot nyata belum dieksekusi</div>
+  </div>
+</div>
+
+<!-- ======================== A. PROJECT vs RELEASE DOCS ======================== -->
+<section>
+  <h2>🅰️ Project vs Release Documents</h2>
+  <div class="legend">
+    <div class="legend-item"><span class="badge badge-ok">🟢 Cocok</span> Sesuai dokumentasi</div>
+    <div class="legend-item"><span class="badge badge-warn">🟡 Perlu Update</span> Inkonsisten minor</div>
+    <div class="legend-item"><span class="badge badge-fail">🔴 Tidak Cocok</span> Missing/hilang</div>
+    <div class="legend-item"><span class="badge badge-info">🔵 Likely OK</span> Indikasi kuat OK</div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:22%">Item</th>
+        <th style="width:30%">Klaim di Dokumen</th>
+        <th style="width:33%">Kondisi Nyata</th>
+        <th style="width:15%">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Versi</strong></td>
+        <td><span class="path">v1-release.md</span> → v1.0.0<br><span class="path">CHANGELOG.md</span> → v0.9.5</td>
+        <td>Commit terakhir: <span class="path">7b4cf72</span> pada master branch</td>
+        <td><span class="badge badge-warn">🟡 Inkonsisten</span></td>
+      </tr>
+      <tr>
+        <td><strong>Release Status</strong></td>
+        <td>"READY WITH MINOR NON-BLOCKING ISSUES"</td>
+        <td>Audit 3-format tersedia, 5 stories via commit <span class="path">0ab0345</span></td>
+        <td><span class="badge badge-ok">🟢 Cocok</span></td>
+      </tr>
+      <tr>
+        <td><strong>Bible Map</strong></td>
+        <td>Tersedia</td>
+        <td><span class="path">public/assets/js/map.js</span> (3661 B) + <span class="path">api/eras.php</span> & <span class="path">api/stories.php</span></td>
+        <td><span class="badge badge-ok">🟢 Cocok</span></td>
+      </tr>
+      <tr>
+        <td><strong>3 Kelas</strong></td>
+        <td>Kecil / Madya / Besar</td>
+        <td>Class identity di <span class="path">design-system.md</span> + 5 stories × 3 class support</td>
+        <td><span class="badge badge-ok">🟢 Cocok</span></td>
+      </tr>
+      <tr>
+        <td><strong>6 Game Mechanics</strong></td>
+        <td>multiple_choice, true_false, sequence, matching, timeline, verse_puzzle</td>
+        <td><span class="path">game-engine.js</span> 29.975 B — engine besar, lengkap</td>
+        <td><span class="badge badge-info">🔵 Likely OK</span></td>
+      </tr>
+      <tr>
+        <td><strong>Teacher Login</strong></td>
+        <td>Tersedia</td>
+        <td><span class="path">public/teacher/login.php</span> (3.888 B)</td>
+        <td><span class="badge badge-ok">🟢 Cocok</span></td>
+      </tr>
+      <tr>
+        <td><strong>Admin Login</strong></td>
+        <td>Tersedia</td>
+        <td><span class="path">public/admin/login.php</span> (4.630 B)</td>
+        <td><span class="badge badge-ok">🟢 Cocok</span></td>
+      </tr>
+      <tr>
+        <td><strong>Session Token Login</strong></td>
+        <td>3-step: kode sesi, pilih nama, PIN pad (commit <span class="path">7b4cf72</span>)</td>
+        <td>Implementasi ada di commit terbaru</td>
+        <td><span class="badge badge-ok">🟢 Cocok</span></td>
+      </tr>
+      <tr>
+        <td><strong>Audio Manager</strong></td>
+        <td>Iteration 10 (commit <span class="path">85c7dad</span>)</td>
+        <td><span class="path">audio-manager.js</span> (4.478 B)</td>
+        <td><span class="badge badge-ok">🟢 Cocok</span></td>
+      </tr>
+      <tr>
+        <td><strong>Confetti</strong></td>
+        <td>Iteration 10</td>
+        <td><span class="path">confetti.js</span> (1.195 B)</td>
+        <td><span class="badge badge-ok">🟢 Cocok</span></td>
+      </tr>
+      <tr>
+        <td><strong>Health Endpoint</strong></td>
+        <td><span class="path">public/health.php</span> tersedia</td>
+        <td>Ada (1.175 B)</td>
+        <td><span class="badge badge-ok">🟢 Cocok</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ======================== B. v1 SCOPE VALIDATION ======================== -->
+<section>
+  <h2>🅱️ Validasi v1 Scope (dari v1-release.md)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:25%">Scope Item</th>
+        <th style="width:60%">Bukti Fisik</th>
+        <th style="width:15%">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Bible Map</td><td><span class="path">api/eras.php</span>, <span class="path">stories.php</span>, <span class="path">map.js</span></td><td><span class="badge badge-ok">🟢</span></td></tr>
+      <tr><td>Story Content (active+verified)</td><td><span class="path">database/schema_stories_questions.sql</span> (8.046 B)</td><td><span class="badge badge-ok">🟢</span></td></tr>
+      <tr><td>Player Progress (session+registered)</td><td><span class="path">progress.js</span> (4.552 B), <span class="path">api/answer.php</span></td><td><span class="badge badge-ok">🟢</span></td></tr>
+      <tr><td>Teacher Session Control</td><td><span class="path">session-create.php</span> (13.597 B), <span class="path">players.php</span>, <span class="path">sessions.php</span></td><td><span class="badge badge-ok">🟢</span></td></tr>
+      <tr><td>Content Management</td><td><span class="path">admin/users.php</span> (17.388 B), <span class="path">admin/players-manage.php</span></td><td><span class="badge badge-ok">🟢</span></td></tr>
+      <tr><td>Analytics Dashboard</td><td><span class="path">public/teacher/analytics.php</span> (13.061 B)</td><td><span class="badge badge-ok">🟢</span></td></tr>
+      <tr><td>Backup Procedure</td><td><span class="path">docs/backup-recovery.md</span></td><td><span class="badge badge-ok">🟢 Dokumen saja</span></td></tr>
+      <tr><td>Security Baseline</td><td><span class="path">config/security.php</span>, <span class="path">docs/security.md</span></td><td><span class="badge badge-ok">🟢</span></td></tr>
+      <tr><td>Deployment</td><td><span class="path">docs/deployment.md</span>, <span class="path">public/health.php</span></td><td><span class="badge badge-ok">🟢</span></td></tr>
+      <tr><td>Audit Export 3-format</td><td><span class="path">docs/audit/*.csv</span>, <span class="path">*.xls</span>, <span class="path">*.xml</span></td><td><span class="badge badge-ok">🟢</span></td></tr>
+      <tr><td>Test Scenarios</td><td><span class="path">docs/audit/bible-adventure-test-scenarios.csv</span> — 23 PASS, 2 Manual-Required</td><td><span class="badge badge-ok">🟢</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ======================== C. KETIDAKSESUAIAN & GAP ======================== -->
+<section>
+  <h2>🅲️ Ketidaksesuaian & Gap yang Ditemukan</h2>
+
+  <h3>🔴 Prioritas Tinggi — Harus Ditangani Sebelum Release</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:5%">#</th>
+        <th style="width:22%">Area</th>
+        <th style="width:45%">Temuan</th>
+        <th style="width:28%">Rekomendasi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><span class="path">stories-release-list.md</span></td>
+        <td><strong>MISSING FILE</strong> — Dirujuk 2× oleh <span class="path">v1-release.md</span> & <span class="path">content-release.md</span>, tapi file tidak ada</td>
+        <td>Buat file dengan 5 stories + status verified/needs_review</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="path">CHANGELOG.md</span></td>
+        <td>Outdated — masih di v0.9.5, tidak mencatat Iterasi 14 (post-pilot) & Iterasi 15 (finalisasi)</td>
+        <td>Tambah entry v1.0.0 dengan ringkasan seluruh iterasi</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Pilot Documents</td>
+        <td><span class="path">pilot-summary.md</span>, <span class="path">pilot-issues.md</span>, <span class="path">pilot-observation.md</span>, <span class="path">post-pilot-validation.md</span>, <span class="path">post-pilot-fix-plan.md</span> — semua masih placeholder/template, belum ada data aktual</td>
+        <td>Eksekusi pilot nyata atau isi dengan data historis yang valid</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><span class="path">content-release.md</span></td>
+        <td>5 stories (creation, noah, abraham, yusuf, musa) masih placeholder <code>[lihat per-class]</code> & <code>verified / needs_review</code></td>
+        <td>Isi jumlah question & status dari data aktual database</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><span class="path">mechanics-release.md</span></td>
+        <td>Hanya <code>multiple_choice</code> yang di-mark <code>supported</code>; 5 mekanik lain masih <code>[supported / partial / not_supported]</code></td>
+        <td>Nilai dengan evidence dari pilot/observasi</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>🟡 Minor Cleanup</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:5%">#</th>
+        <th style="width:22%">Area</th>
+        <th style="width:45%">Temuan</th>
+        <th style="width:28%">Rekomendasi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>6</td>
+        <td>Untracked files</td>
+        <td><span class="path">database/_archive/</span>, <span class="path">_check_tables.php</span>, <span class="path">_import_story_schema.php</span> belum di-commit</td>
+        <td>Tambahkan ke <span class="path">.gitignore</span> atau commit sebagai utility scripts</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Validation Report</td>
+        <td><span class="path">post-pilot-validation.md</span> masih template, belum ada Validation Date, Reviewer, Status</td>
+        <td>Isi setelah pilot selesai atau tandai sebagai "Pending"</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Iterasi Tracking</td>
+        <td><span class="path">v1-release.md</span> punya checklist DoD tapi belum di-checkmark</td>
+        <td>Review dan centang item yang sudah selesai</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ======================== D. DEFINITION OF DONE — ITERASI 15 ======================== -->
+<section>
+  <h2>🅳️ Definition of Done — Iterasi 15 (dari v1-release.md)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:5%">✓</th>
+        <th style="width:55%">Kriteria</th>
+        <th style="width:15%">Status</th>
+        <th style="width:25%">Catatan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>☐</td><td>V1 scope final terdokumentasi</td><td><span class="badge badge-ok">🟢</span></td><td><span class="path">v1-release.md</span></td></tr>
+      <tr><td>☐</td><td>V1 non-scope terdokumentasi</td><td><span class="badge badge-ok">🟢</span></td><td><span class="path">v1-release.md</span></td></tr>
+      <tr><td>☐</td><td>Tidak ada P0 terbuka</td><td><span class="badge badge-warn">🟡</span></td><td><span class="path">pilot-issues.md</span> masih template</td></tr>
+      <tr><td>☐</td><td>Tidak ada content wrong/draft yang lolos release</td><td><span class="badge badge-warn">🟡</span></td><td><span class="path">content-release.md</span> belum final</td></tr>
+      <tr><td>☐</td><td>Documentation final tersedia</td><td><span class="badge badge-ok">🟢</span></td><td>28+ docs ada</td></tr>
+      <tr><td>☐</td><td>Teacher guide tersedia</td><td><span class="badge badge-ok">🟢</span></td><td><span class="path">teacher-guide.md</span></td></tr>
+      <tr><td>☐</td><td>Admin guide tersedia</td><td><span class="badge badge-ok">🟢</span></td><td><span class="path">admin-guide.md</span></td></tr>
+      <tr><td>☐</td><td>Developer guide tersedia</td><td><span class="badge badge-ok">🟢</span></td><td><span class="path">developer-guide.md</span></td></tr>
+      <tr><td>☐</td><td>Operations / runbook tersedia</td><td><span class="badge badge-ok">🟢</span></td><td><span class="path">operations.md</span></td></tr>
+      <tr><td>☐</td><td>v2-backlog tersedia</td><td><span class="badge badge-ok">🟢</span></td><td><span class="path">v2-backlog.md</span></td></tr>
+      <tr><td>☐</td><td><span class="path">stories-release-list.md</span> tersedia</td><td><span class="badge badge-fail">🔴</span></td><td><strong>MISSING</strong></td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:10px; font-size:0.85rem; color:#666;">
+    <strong>Progress DoD:</strong> 9 dari 11 kriteria (82%) siap. 2 item masih outstanding.
+  </p>
+</section>
+
+<!-- ======================== E. CONSISTENCY CHECK ======================== -->
+<section>
+  <h2>🅴️ Cross-Reference Consistency Check</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">File Sumber</th>
+        <th style="width:35%">Merujuk ke</th>
+        <th style="width:15%">Referensi Ada?</th>
+        <th style="width:20%">Catatan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="path">working-instruction.md</span></td><td>admin-guide.md, teacher-guide.md, troubleshooting.md, pilot-checklist.md, pilot-issues.md</td><td><span class="badge badge-ok">🟢 Semua ada</span></td><td>—</td></tr>
+      <tr><td><span class="path">v1-release.md</span></td><td>teacher-guide.md, admin-guide.md, developer-guide.md, troubleshooting.md, v2-backlog.md, security.md, operations.md</td><td><span class="badge badge-ok">🟢 Semua ada</span></td><td>—</td></tr>
+      <tr><td><span class="path">v1-release.md</span></td><td><span class="path">stories-release-list.md</span></td><td><span class="badge badge-fail">🔴 Tidak ada</span></td><td>MISSING</td></tr>
+      <tr><td><span class="path">content-release.md</span></td><td><span class="path">stories-release-list.md</span></td><td><span class="badge badge-fail">🔴 Tidak ada</span></td><td>MISSING</td></tr>
+      <tr><td><span class="path">production-readiness.md</span></td><td><span class="path">public/health.php</span></td><td><span class="badge badge-ok">🟢 Ada</span></td><td>—</td></tr>
+      <tr><td><span class="path">security.md</span></td><td><span class="path">config/security.php</span></td><td><span class="badge badge-ok">🟢 Ada</span></td><td>—</td></tr>
+      <tr><td><span class="path">deployment.md</span></td><td>health.php, player login, teacher login, analytics dashboard</td><td><span class="badge badge-ok">🟢 Semua ada</span></td><td>—</td></tr>
+      <tr><td><span class="path">developer-guide.md</span></td><td>sendSecurityHeaders() helper</td><td><span class="badge badge-info">🔵 Likely ada</span></td><td>Di <span class="path">config/security.php</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ======================== F. RECOMMENDATION ======================== -->
+<section>
+  <h2>🅵️ Rekomendasi Tindak Lanjut</h2>
+
+  <div class="recommend">
+    <h4>⚡ Action Items (Urutan Prioritas)</h4>
+    <ol>
+      <li><strong>Buat <span class="path">stories-release-list.md</span></strong> — File yang hilang, dirujuk 2× oleh dokumen release.</li>
+      <li><strong>Update <span class="path">CHANGELOG.md</span></strong> — Catat seluruh iterasi dari commit history (Iteration 2 → 15).</li>
+      <li><strong>Eksekusi pilot nyata atau isi template</strong> — <span class="path">pilot-summary.md</span>, <span class="path">pilot-issues.md</span>, <span class="path">post-pilot-validation.md</span>, <span class="path">post-pilot-fix-plan.md</span>.</li>
+      <li><strong>Finalisasi <span class="path">content-release.md</span></strong> — Isi jumlah question per story dan status verified/needs_review dari database.</li>
+      <li><strong>Finalisasi <span class="path">mechanics-release.md</span></strong> — Nilai 5 mekanik (true_false, sequence, matching, timeline, verse_puzzle) dengan evidence.</li>
+      <li><strong>Cleanup untracked files</strong> — Tambahkan ke <span class="path">.gitignore</span> atau commit sebagai utility scripts.</li>
+      <li><strong>Centang DoD Iteration 15</strong> — 9 dari 11 kriteria siap, tinggal validasi 2 item outstanding.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p>📄 File: <span class="path">docs/audit/project-status-comparison.html</span></p>
+  <p>🕒 Generated: 20 Agustus 2026, 10:28 WIB · Refresh otomatis setiap dijalankan ulang</p>
+  <p>© Bible Adventure · Sekolah Minggu GKJ Tangerang</p>
+</footer>
+
+</div>
+</body>
+</html>

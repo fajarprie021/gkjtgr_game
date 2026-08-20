@@ -12,11 +12,11 @@
 | Mechanic | Status | Catatan |
 |----------|--------|---------|
 | multiple_choice | supported | basic flow berjalan |
-| true_false | [supported / partial / not_supported] | isi dari bukti nyata |
-| sequence | [supported / partial / not_supported] | isi dari bukti nyata |
-| matching | [supported / partial / not_supported] | isi dari bukti nyata |
-| timeline | [supported / partial / not_supported] | isi dari bukti nyata |
-| verse_puzzle | [supported / partial / not_supported] | isi dari bukti nyata |
+| true_false | partial | tersedia di engine, butuh re-test gameplay |
+| sequence | partial | tersedia di engine, butuh re-test gameplay |
+| matching | partial | tersedia di engine, butuh re-test gameplay |
+| timeline | partial | tersedia di engine, butuh re-test gameplay |
+| verse_puzzle | partial | tersedia di engine, butuh re-test gameplay |
 
 ---
 

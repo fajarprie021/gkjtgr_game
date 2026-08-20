@@ -21,11 +21,11 @@ Inactive         : tidak masuk release
 
 | Story | Era | Reference | Classes Supported | Questions | Status |
 |-------|-----|-----------|-------------------|-----------|--------|
-| creation | Creation | Kej 1-2 | Kecil, Madya, Besar | [lihat per-class] | verified / needs_review |
-| noah | Patriarchs | Kej 6-9 | Kecil, Madya, Besar | [lihat per-class] | verified / needs_review |
-| abraham | Patriarchs | Kej 12-22 | Kecil, Madya, Besar | [lihat per-class] | verified / needs_review |
-| yusuf | Patriarchs | Kej 37-50 | Kecil, Madya, Besar | [lihat per-class] | verified / needs_review |
-| musa | Exodus | Kel 1-15 | Kecil, Madya, Besar | [lihat per-class] | verified / needs_review |
+| creation | Creation | Kej 1-2 | Kecil, Madya, Besar | verified (jumlah soal perlu audit rinci) | verified |
+| noah | Patriarchs | Kej 6-9 | Kecil | verified / needs_review (medium/large masih perlu verifikasi) | needs_review |
+| abraham | Patriarchs | Kej 12-25 | Pending | needs_review | needs_review |
+| yusuf | Patriarchs | Kej 37-50 | Pending | needs_review | needs_review |
+| musa | Exodus | Kel 1-15 | Pending | needs_review | needs_review |
 
 > Isi jumlah question dan status dari data aktual, jangan dikira-kira.
 

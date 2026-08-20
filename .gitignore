@@ -26,6 +26,11 @@ Thumbs.db
 prompt/
 *.zip
 
+# Database scratch / archive helpers
+database/_archive/
+database/_check_tables.php
+database/_import_story_schema.php
+
 # PHP
 vendor/
 composer.lock
